@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+<button>获取</button>
+    <ul>
+        <li v-for="item in list">
+            {{item.name}}
+            <ul>
+                <li v-for="i in item.list">{{i}}</li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        created(){
+            //this是当前根实例
+            //只要数据有了就会执行
+            this.getData();
+        },
+        data: {
+            list:[],
+        },
+        methods: {
+            getData(){
+               //获取数据
+                axios.get("list.json").then((data)=>{
+                    this.list=data.data;
+                },()=>{})
+            }
+        }
+    })
+</script>

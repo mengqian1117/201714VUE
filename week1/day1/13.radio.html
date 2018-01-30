@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+
+
+    <input type="radio" v-model="a" value="男">男
+    <input type="radio" v-model="a" value="女">女
+    {{"你选择的是:"+a}}
+
+    <button @click="fn()">点我</button>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a:""
+        },
+        methods: {
+            fn(){
+
+            }
+        }
+    });
+
+</script>

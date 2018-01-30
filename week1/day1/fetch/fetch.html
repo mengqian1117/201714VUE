@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<img id="img1" src="" alt="">
+</body>
+</html>
+<script>
+    fetch("data.json").then((res)=>{
+        res.json().then((data)=>{
+            console.log(data);
+        },()=>{});
+    },()=>{});
+    fetch("1.jpg").then((res)=>{
+        res.blob().then((data)=>{
+            img1.src= URL.createObjectURL(data)
+        })
+    });
+</script>
