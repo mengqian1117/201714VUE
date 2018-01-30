@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+
+    <ul>
+        <!--循环谁给加v-for-->
+        <!--v-for="item in 5"  从1->5 -->
+        <!--<li v-for="item in 5">{{item}}</li>-->
+        <!--字符串：循环每一项-->
+        <!--<li v-for="item in str">{{item}}</li>-->
+        <!--对象的时候 只写一个就是属性值,如果(属性值,属性)-->
+        <!--<li v-for="(item,key) in obj">{{item}}{{key}}</li>-->
+        <!--数组 只写一个是当前项,写成(当前项,索引)-->
+        <li v-for="(item,index) in arr">{{item}}{{index}}</li>
+    </ul>
+    <ul>
+        <li v-for="item in list">
+            <span v-for="(val,key) in item">{{key}}是:{{val}};</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            str:"name",
+            obj:{name:"珠峰",age:10},
+            arr:["哈哈","嘻嘻","嘿嘿"],
+            list:[{name:"a",age:12,sex:"女"},{name:"b",age:22,sex:"男"},{name:"c",age:32,sex:"不详"}]
+        },
+        methods: {}
+    })
+</script>

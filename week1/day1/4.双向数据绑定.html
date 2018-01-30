@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<input id="input" type="text" value="">
+<p id="p"></p>
+</body>
+</html>
+<script type="text/javascript">
+    let obj={};
+    let temp={};
+    Object.defineProperty(obj,"name",{
+        get(){
+            //只要获取这个对象obj的属性name就会触发这个函数,并且会拦截
+            //获取 obj.name
+            //这个函数返回什么 获取的值就是什么
+            return temp["name"]  ;
+        },
+        set(val){
+            //只要是给obj.name设置值就会触发这函数,并且拦截
+            //默认给set传一个参数就是设置的值
+            temp.name=val;
+            input.value=val;
+        }
+    });
+    input.oninput=function () {
+        //当正在输入的时候触发的事件;
+        obj.name=this.value;
+        p.innerHTML=this.value
+    };
+
+
+
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body >
+<div id="app">
+    <!--{{小胡子语法: 直接写数据 , 数据赋值 , 三元运算符 , 数学运算 }}-->
+    <p>{{a}}</p>
+    <p>{{b=1}}</p>
+    {{num<10?"0"+num:num}}
+    {{num+1}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //只要是引入了vue 就有了一个构造函数Vue
+    //vm就是 vue的根实例
+    let vm=new Vue({
+        //el:给当前vue实例限定管辖的视图
+        //<html> or <body>  不要将vue挂载在html和body中
+        el:"#app",//选择器
+        data:{
+            //这里存放的是当前根实例vm中数据
+            a:"珠峰",
+            b:"201714Vue",
+            num:12
+        }
+    });
+    console.log(vm);
+    //获取数据的方式
+    /*
+    console.log(vm.$data.a);
+    console.log(vm.$data.b);
+    console.log(vm.a);
+    console.log(vm.b);
+    */
+</script>

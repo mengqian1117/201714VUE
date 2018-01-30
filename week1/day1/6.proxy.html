@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<input type="text" id="input">
+<p id="p1">
+</p>
+</body>
+</html>
+<script type="text/javascript">
+    //es6 中的一个构造函数 Proxy
+    let temp={name:"珠峰"};
+    let p=new Proxy(temp,{
+        get(temp,key,p){
+            //默认传3个参数
+            //temp:代理的原对象
+            //key:获取属性
+            //p:当前实例
+            //通过 p.属性/p["属性"] 获取值的时候被他拦截
+            return temp[key]
+        },
+        set(temp,key,val,p){
+            //四个参数
+            //val 设置的属性值
+            //通过 p.属性/p["属性"]=值的时候 被他拦截
+            temp[key]=val;
+            input.value=val;
+        }
+    });
+    input.addEventListener("input",function () {
+        p.name=this.value;
+        p1.innerHTML=p.name;
+    });
+
+</script>

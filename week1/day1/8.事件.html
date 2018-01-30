@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<!--<div onclick="fn(event)"></div>-->
+<div id="app">
+    <!--v-on:事件类型="函数"-->
+    <!--如果不传实参写不写()都一样,一旦加上()必须要传实参事件对象$event,不写()默认就会传事件对象-->
+    <!--<button v-on:click="fn">点击</button>-->
+    <!--简写@事件类型="函数"-->
+    <button @click="fn">点击</button>
+    <p>{{num}}</p>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            num:1,
+        },
+        methods:{
+            //盛放所有的函数
+            //这里千万不要写箭头函数
+            fn(e){
+                //函数的this都是实例vm
+                //console.log(e);
+                //console.log(this);
+                this.num++;
+            }
+        }
+    })
+</script>

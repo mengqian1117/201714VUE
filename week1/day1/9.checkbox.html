@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <!--<input type="color" v-model="a">{{a}}-->
+    <!--<input type="number" v-model="a">{{a}}-->
+    <!--<input type="range" v-model="a" max="1000" min="100" >{{a}}-->
+    <!--v-model 就代替了value  checked值  selected-->
+    <!--<input type="text" v-model="a" value="哈哈">-->
+
+    <!--只有一个checkbox时候 v-model=布尔值 -->
+    <!--多个checkbox时候给他们的v-model=[],选择时候会将value属性的值放在数组中-->
+    <input type="checkbox" @change="changeOne"  v-model="c" value="苹果">苹果
+    <input type="checkbox" @change="changeOne" v-model="c" value="桃子">桃子
+    <input type="checkbox" @change="changeOne" v-model="c" value="柚子">柚子
+    <input type="checkbox" @change="changeOne" v-model="c" value="香蕉">香蕉
+    <input type="checkbox" @change="changeOne" v-model="c" value="草莓">草莓
+    <input type="checkbox" @change="change" v-model="all" >全选/不全选
+    <br>
+    {{c}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            a:"",
+            c:[],
+            all:false,
+        },
+        methods:{
+            changeOne(){
+                //一旦全部选中了就让全选的也被选中,只需要all变成true
+                this.all=this.c.length==5;
+            },
+            change(){
+                //all 是true,想让所有的都被选中,只需要将数组c=["苹果","桃子","柚子","香蕉","草莓"];
+                //all 是false  c=[];
+                // if(this.all){
+                //     this.c=["苹果","桃子","柚子","香蕉","草莓"];
+                // }else {
+                //     this.c=[];
+                // }
+                this.c=this.all?["苹果","桃子","柚子","香蕉","草莓"]:[];
+            }
+        }
+    })
+</script>

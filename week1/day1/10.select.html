@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <!--<select v-model="arr">-->
+        <!--&lt;!&ndash;选中的是哪一个option arr就是谁 ,option没有value,arr就是option中的值,有value就是value的值&ndash;&gt;-->
+        <!--<option value="1">苹果</option>-->
+        <!--<option value="2">桃子</option>-->
+        <!--<option value="3">李子</option>-->
+    <!--</select>-->
+    <!--{{arr}}-->
+
+    <!--多选的时候  multiple属性, v-model=[],将选择的内容放在数组中,没有value就是option的内容 ,有value就是value的值-->
+    <select v-model="list" multiple>
+        <option disabled>苹果</option>
+        <option >桃子</option>
+        <option >李子</option>
+    </select>
+    {{list}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            arr:"",
+            list:[],
+        },
+        methods: {}
+    })
+</script>

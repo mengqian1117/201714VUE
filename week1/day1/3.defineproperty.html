@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+   let obj={a:"珠峰"};
+   console.log(Object.getOwnPropertyDescriptor(obj, "a"));
+   /*
+   {
+       configurable:true
+       enumerable:true
+       value:"珠峰"
+       writable:true
+   }
+   */
+   //给对象设置属性 以及他的配置参数
+   /*
+   let o={};
+   Object.defineProperty(o,"name",{
+       configurable:false,//是否可以删除
+       writable:true,//是否可修改
+       enumerable:false,//是否可枚举
+       value:"珠峰",
+   });
+
+   //delete o.name;
+   o.name="QQ";
+   console.log(o);
+   */
+</script>

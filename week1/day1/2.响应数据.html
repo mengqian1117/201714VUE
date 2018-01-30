@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    {{arr}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            //只是在data中初始的时候加过的数据,都会加一个setter和getter拦截, 为后面实现数据视图的响应做处理的
+            hello:"hello Word",
+            a:{
+                //如果是一个对象,里面的属性一定要初始化一下才会实现数据和视图的响应
+                name:""
+            },
+            arr:[1,2,3,"哈哈","珠峰"]
+        }
+    });
+    console.log(vm);
+    //可以修改a 视图也会改变
+    //vm.a={name:"zf"}
+    //vm.$set(vm.a,"name","珠峰");
+
+    //注意:如果数据是数组必须改变原数组才可以 响应视图
+
+    //vm.arr.splice(1,1);
+    //vm.arr.pop();
+    vm.arr=vm.arr.filter(item=>typeof item=="string")
+</script>
