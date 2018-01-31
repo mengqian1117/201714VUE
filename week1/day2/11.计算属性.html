@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    {{all}}
+    <input type="checkbox" v-model="all">全选
+    <input type="checkbox" v-model="obj.arr" value="A">A
+    <input type="checkbox" v-model="obj.arr" value="B">B
+    <input type="checkbox" v-model="obj.arr" value="C">C
+    <input type="checkbox" v-model="obj.arr" value="D">D
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        created(){
+            //this.obj={arr:[]}
+            this.$set(this.obj,"arr",[])
+        },
+        computed:{
+            //计算属性 也是给实例增加的数据  不要跟data和methods中的重名
+            //这里面的属性需要写两个函数 get, set;
+            all:{
+                get(){
+                    //只要是获取数据all 就会触发这个get函数,返回什么值就会得到什么值,只要是依赖的值(必须是有响应的数据,数据上必须有setter和getter拦截)有变化就会重新计算
+                    return this.obj.arr.length==4;
+                },
+                set(val){
+                    //只要是给all赋值的时候就会触发这个函数 例如输入框和选择框
+                    this.obj.arr=val?this.arr:[];
+                },
+            },
+            // 或者只写一个get,也可以不写,直接将属性写一个函数 默认就是get
+            //all(){}
+        },
+        data: {
+            arr:["A","B","C","D"],
+            obj:{}
+        },
+        methods: {}
+    });
+</script>

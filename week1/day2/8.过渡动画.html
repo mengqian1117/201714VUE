@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        .box1{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        /*
+        .起的名字-enter
+        */
+        .zf-enter{opacity: 0}
+        .zf-enter-active{transition: all 2s linear}
+        .zf-leave-active{opacity: 0;transition: all 2s linear}
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--想让谁有过渡效果就使用一个transition标签包起来,他是vue中自己封装好的一个组件  给transition加一个那么属性="你起一个名字"-->
+    <button @click="show=!show">切换</button>
+    <transition name="zf">
+        <div class="box1" v-show="show"></div>
+    </transition>
+
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            show:true,
+        },
+        methods: {}
+    })
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <style>
+        #app div{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="query" @input="change">
+    <!--<transition> can only be used on a single element. Use <transition-group> -->
+    <!--<transition> 只能放一个元素,一组使用<transition-group>-->
+    <transition-group enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+        <!--<transition-group> children must be keyed: <div>-->
+        <!--每一个div必须有一个属性 key ,目的就是为了区分 给每一个key赋一个不一样的值-->
+        <div v-for="(i,index) in a" :key="index">{{i}}</div>
+    </transition-group>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            arr:[1,3,5,2,13,23],
+            a:[],
+            query:"",
+        },
+        methods: {
+            change(){
+                //根据this.query的值过滤arr
+                this.a=this.arr.filter(item=>item.toString().includes(this.query));
+            }
+        }
+    })
+</script>

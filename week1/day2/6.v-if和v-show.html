@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <!--
+    v-if   v-show 都是根据里面的数据(变成布尔值)的值控制显示和隐藏的
+    v-if   控制的是DOM
+    v-show 控制的是样式
+
+    如果频繁的切换显示隐藏使用v-show性能好点
+    -->
+    <div v-if="a">哈哈</div>
+    <div v-else-if="b">呵呵</div>
+    <div v-show="a">嘿嘿</div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a:false,
+            b:1,
+        },
+        methods: {}
+    })
+</script>

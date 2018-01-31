@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        span{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in list">
+            <input type="checkbox" v-model="item.is" @change="checkAll(item)">
+            <span @click="item.isShow=!item.isShow">
+                {{item.name}}
+            </span>
+            <ul v-show="item.isShow">
+                    <li v-for="i in item.list">
+                        <input type="checkbox" v-model="item.listSelect" :value="i" @change="checkOne(item)">
+                        {{i}}
+                    </li>
+                </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        created(){
+            this.getData();
+        },
+        data: {
+            list:[],
+        },
+        methods: {
+            getData(){
+                axios.get("data/list.json").then((res)=>{
+                    this.list=res.data;
+                })
+            },
+            checkAll(item){
+                //如果当前项的is值是true 就让当前项的listSelect=list
+                //如果当前项的is值是false 就让当前项的listSelect=[]
+                // if(item.is){
+                //     item.listSelect=item.list;
+                // }else {
+                //     item.listSelect=[];
+                // }
+                item.listSelect=item.is?item.list:[];
+            },
+            checkOne(item){
+                item.is=item.list.length==item.listSelect.length;
+            },
+        }
+    })
+</script>

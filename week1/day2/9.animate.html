@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <style>
+        #app div{
+            font-size: 100px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="flg=!flg">切换</button>
+    <!--enter-active-class="进入时候的动画 animated bounceInUp"-->
+    <!--leave-active-class="进入时候的动画 animated bounceInUp"-->
+    <transition enter-active-class="animated bounceInRight" leave-active-class="animated bounceOutLeft">
+        <div v-if="flg">I LOVE YOU</div>
+    </transition>
+
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {flg:true},
+        methods: {}
+    })
+</script>

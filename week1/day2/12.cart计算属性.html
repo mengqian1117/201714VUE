@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        caption{
+            caption-side:top;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+<div class="container">
+    <div class="row">
+
+        <table class="table table-hover table-bordered">
+            <caption class="h2 text-center text-danger">
+                购物车
+            </caption>
+            <tr>
+                <th>
+                    全选
+                    <input type="checkbox" v-model="all">
+                </th>
+                <td>商品</td>
+                <td>单价</td>
+                <td>数量</td>
+                <td>小计</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(item,index) in products">
+                <td>
+                    <input type="checkbox" v-model="item.isSelected">
+                </td>
+                <td>
+                    <img :src="item.productCover" alt="">
+                    {{item.productName}}
+                </td>
+                <td>
+                    {{item.productPrice}}
+                </td>
+                <td>
+                    <input type="number" v-model="item.productCount" min="1">
+                </td>
+                <td>
+                    {{item.productPrice*item.productCount|toFixed(2)}}
+                </td>
+                <td>
+                    <button class="btn btn-danger" @click="remove(index)">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">总价格:{{sum|toFixed(2)}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        computed:{
+            all:{
+                get(){
+                    return this.products.every(item=>item.isSelected)
+                },
+                set(val){
+                    this.products.forEach(item=>item.isSelected=val)
+                }
+            },
+            //sum 不是函数他是一个属性,你写成一个函数,他表示的是get
+            sum(){
+                return this.products.reduce((pre,cur)=>{
+                    if(!cur.isSelected) return pre;
+                    return pre+ cur.productPrice*cur.productCount;
+                },0)
+            },
+        },
+        filters:{
+            toFixed(val,num){
+                return "¥"+val.toFixed(num)
+            }
+        },
+        created(){
+            this.getData()
+        },
+        data: {
+            products:[],
+        },
+        methods: {
+            getData(){
+                axios.get("data/carts.json").then(res=>{
+                    this.products=res.data;
+                })
+            },
+            remove(i){
+                this.products.splice(i,1);
+            }
+        }
+    });
+
+</script>
