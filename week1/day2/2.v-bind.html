@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="className">
+    <!--v-bind:属性="动态的数据"-->
+    <div v-bind:class="className" v-text="a"></div>
+    <div :class="className|fn(3)" v-text="a"></div>
+
+    <ul>
+        <li v-for="item in arr">
+            <input type="checkbox" v-model="b" :value="item">
+            {{item}}
+        </li>
+    </ul>
+    {{b}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a:"哈哈",
+            className:"",
+            arr:["A","B","C"],
+            b:[],
+        },
+        filters:{
+            fn(val,n){
+                console.log(this);
+                return val+"zf".repeat(n)
+            }
+        },
+
+        methods: {}
+    })
+</script>

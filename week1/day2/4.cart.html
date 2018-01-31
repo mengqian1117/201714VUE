@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+<div class="container">
+    <div class="row">
+
+        <table class="table table-hover table-bordered">
+            <caption style="caption-side:top;" class="h2 text-center text-danger">购物车</caption>
+            <tr>
+                <th>
+                    全选
+                    <input type="checkbox" v-model="all" @change="isAll">
+                </th>
+                <td>商品</td>
+                <td>单价</td>
+                <td>数量</td>
+                <td>小计</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(item,index) in products">
+                <td>
+                    <input type="checkbox" v-model="item.isSelected" @change="checkOne">
+                </td>
+                <td>
+                    <img :src="item.productCover" alt="">
+                    {{item.productName}}
+                </td>
+                <td>
+                    {{item.productPrice}}
+                </td>
+                <td>
+                    <input type="number" v-model="item.productCount" min="1">
+                </td>
+                <td>
+                    {{item.productPrice*item.productCount|toFixed(2)}}
+                </td>
+                <td>
+                    <button class="btn btn-danger" @click="remove(index)">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">总价格:{{"¥"+sum()}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        filters:{
+            toFixed(val,num){
+                return "¥"+val.toFixed(num)
+            }
+        },
+        created(){
+            this.getData()
+        },
+        data: {
+            products:[],
+            all:false,
+        },
+        methods: {
+            getData(){
+                //获取数据
+                axios.get("data/carts.json").then(res=>{
+                    this.products=res.data;
+                    //先计算一次all的值
+                    this.checkOne();
+                })
+            },
+            isAll(){
+                //让products中的每一项的isSelected的值跟着 all的值变化
+                this.products.forEach(item=>item.isSelected=this.all);
+            },
+            checkOne(){
+                //all的值是根据this.products每一项的isSelected决定的,全为true,all就是true,只要有一个数false all就是false
+                this.all=this.products.every(item=>item.isSelected);
+            },
+            sum(){
+                return this.products.reduce((pre,cur)=>{
+                    //如果没有选中就不加上当前的
+                    if(!cur.isSelected) return pre;
+                    return pre+ cur.productPrice*cur.productCount;
+                },0)
+            },
+            remove(i){
+                this.products.splice(i,1);
+            }
+        }
+    });
+
+    let arr=[1,2,3,3,4];
+    let a=arr.reduce((p,c)=>p+c,0)
+
+</script>

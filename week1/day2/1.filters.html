@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <!--{{数据 管道符(|) 过滤器 }}-->
+    <p>
+        <!--{{num|addZero()}}-->
+    </p>
+    <p>
+        {{fn()|toFixed(3)}}
+    </p>
+</div>
+<div id="app1">
+    {{ 100| toFixed(2) }}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+    //全局过滤器,必须写在实例之前
+    // Vue.filter("过滤器的名字",函数)
+    Vue.filter("toFixed",(e,n)=>{
+        return e.toFixed(n);
+    });
+
+    let vm = new Vue({
+        el: "#app",
+        /*
+        filters:{
+            //所有的过滤器都写在这里
+            addZero(num){
+                //num 就是管道符前面的数据  默认传的参数
+                //n 就是函数执行的时候手动传的参数
+                return num<10?"0"+num:num
+            },
+            toFixed(e,n){
+                return e.toFixed(n);
+            }
+        },
+        */
+        data: {
+            num:18,
+            n:0.11111,
+        },
+        methods: {
+            fn(){
+                return 100*0.007;
+            }
+        }
+    });
+    let vm1=new Vue({
+        el:"#app1",
+        data:{
+            a:0.2222
+        }
+    });
+
+</script>

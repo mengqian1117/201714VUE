@@ -1,0 +1,26 @@
+[
+  {
+    "isSelected": true,
+    "productCover": "https://img10.360buyimg.com/cms/s80x80_jfs/t3049/211/1135504925/129375/cc072102/57c6862aN329b23fd.jpg",
+    "productName": "Vue.js权威指南",
+    "productInfo": "介绍:大热框架首著惊现 Vue之父作序力荐",
+    "productPrice": 69.8,
+    "productCount": 10
+  },
+  {
+    "isSelected": true,
+    "productCover": "https://img10.360buyimg.com/cms/s80x80_jfs/t6094/107/710811867/382815/4d54717/592bf165N755a88f0.jpg",
+    "productName": "深入浅出Node.js",
+    "productInfo": "介绍：Node.js学习",
+    "productPrice": 57.8,
+    "productCount": 20
+  },
+  {
+    "isSelected": true,
+    "productCover": "https://img10.360buyimg.com/cms/s80x80_jfs/t14848/365/2076510540/93902/e5883831/5a6947e5N39e16ed8.jpg",
+    "productName": "Apple MacBook Air13.3英寸笔记本电脑",
+    "productInfo": "银色(2017新款Core i5 处理器/8GB内存/128GB闪存 MQD32CH/A)",
+    "productPrice": 6499.00,
+    "productCount": 1
+  }
+]
