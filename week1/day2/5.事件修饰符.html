@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app" style="font-size: 50px">
+    <div id="parent" @click.capture="parent">
+        parent
+        <div id="child" @click="child">
+            child
+            <div id="grandSon" @click.stop.once="grandSon">
+                grandSon
+            </div>
+        </div>
+    </div>
+    <a href="https://www.baidu.com" @click.prevent="parent">百度</a>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+      .stop     阻止事件冒泡传播
+      .prevent  阻止事件的默认行为
+      .capture  捕获阶段发生
+      .self     自己作为事件源的时候触发
+      .once     只会触发一次
+
+      修饰符可以连写
+
+      按键修饰符
+      .enter
+      .tab
+      .delete (捕获“删除”和“退格”键)
+      .esc
+      .space
+      .up
+      .down
+      .left
+      .right
+      */
+    let vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            parent(){
+                alert("parent")
+            },
+            child(){
+                alert("child")
+            },
+            grandSon(){
+                alert("GS")
+            },
+        }
+    })
+</script>
