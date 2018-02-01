@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="text">
+    {{a}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        computed:{//不可以只写set
+            a:{
+                get(){
+                    //因为get必须要有返回值return 不可以写异步
+                    //页面渲染的时候,第一次执行的,不要依赖的值变化就会直接执行,后期只要依赖的数据变化就会执行
+                    return this.text+"珠峰"
+                }
+            }
+        },
+        watch:{
+            //监听的数据 在data中初始化
+        },
+        data: {
+            text:"",
+            b:"",
+        },
+        methods: {}
+    });
+    console.log(vm.a);
+</script>

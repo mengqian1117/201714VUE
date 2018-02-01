@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="m1">
+    {{m2}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        watch:{
+            //这个函数名字跟想要监听的数据是一个名字
+            //只要是数据发生改变就会触发这个函数
+            // m1(newVal,oldVal){
+            //     //newVal:新值,oldVal旧值
+            //     console.log("新的"+newVal, "老的"+oldVal);
+            // }
+            // m1:{
+            //     handler(newVal,oldVal){
+            //         //触发的函数
+            //        this.m2=newVal;
+            //     },
+            //     immediate:true,//初始化的时候执行一次,第一次执行的时候只传一个参数就是初始值
+            // }
+
+            obj:{
+                //如果监听的是一个对象,属性的变化是监听不到的
+                handler(newVal,oldVal){
+                    //如果是对象的内容属性变化,两个参数拿到的都是新对象,原理就是引用数据类型是操作地址,改了对象机会改变地址才会有2个地址,如果只改属性值,还是在原来的地址下改变的,地址还是一个,只是内容变了
+                    console.log(newVal);
+                    console.log(oldVal);
+                },
+                deep:true,//监听的深度,加了这个属性就可以监听到内部属性的变成
+            }
+        },
+        data: {
+            m1:"哈哈哈",
+            m2:"",
+            obj:{name:"珠峰"},
+        },
+        methods: {}
+    })
+</script>

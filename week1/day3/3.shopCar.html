@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        caption{
+            caption-side: top
+        }
+        table tr td{
+            text-align: center;
+            font-size: 20px;
+        }
+        table tr th{
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="container">
+    <div class="row">
+        <table class="table table-bordered table-hover table-striped">
+            <caption class="h1 text-danger">购物车</caption>
+            <tr>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="list in carList">
+                <td>{{list.name}}</td>
+                <td>{{list.price|add$("$")}}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" @click="remove(list)">删除</button>
+                </td>
+            </tr>
+            <!--当前删除全部显示是有条件的 如果 carList.length=0 就不要显示-->
+            <tr v-show="carList.length">
+                <td colspan="3">
+                    <button class="btn btn-danger" @click="allRemove">全部删除</button>
+
+                </td>
+            </tr>
+        </table>
+        <form>
+            <div class="form-group row">
+                <label for="name" class="control-label col-md-4">商品名称:</label>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" id="name" v-model="name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="price" class="control-label col-md-4">商品价格:</label>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" id="price" v-model="price">
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg" @click.prevent="submit">提交</button>
+            <button type="reset" class="btn btn-danger btn-lg">重置</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        filters:{
+            add$(val,str){
+                //为了防止val不是一个字符串先使用toString方法变成字符串
+                //判断有没有钱币符号str,没有就拼接一个
+               return val.toString().includes(str)?val:str+val;
+            }
+        },
+        data: {
+            carList:[{name:"衬衣",price:"$999"},{name:"袜子",price:"$9.9"},{name:"毛衣",price:"$99"},{name:"杯子",price:"$19.9"}],
+            name:"",
+            price:"",
+        },
+        methods: {
+            remove(list){
+                this.carList=this.carList.filter(item=>item!=list)
+            },
+            allRemove(){
+                this.carList=[];
+            },
+            submit(){
+                if(this.name&&this.price){
+                    this.carList.push({
+                        name:this.name,
+                        price:this.price
+                    });
+                    //将this.name和this,price变成""
+                    this.name="";
+                    this.price="";
+                }else {
+                    alert("输入框不可以为空");
+                }
+            }
+        }
+    });
+
+    //操作的是数据
+    //1.点击删除按钮,删除当前这一条数据
+    //2.全部删除,将数据清空 []
+    //3.添加 判断如果输入框有一个是空就弹出提醒,
+    //  点击提交按钮增加一条数据
+
+    //  敲回车的时候提交
+</script>
