@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        .sel{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="text">
+    <ul>
+        <li v-for="item in list" :class="{sel:text&&item.includes(text)}">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            list:["苹果","香蕉","橘子","橙子","柚子","桃子"],
+            text:"",
+        },
+        methods: {}
+    })
+</script>

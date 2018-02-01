@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div v-red> 虹色 </div>
+    <div v-red> 虹色 </div>
+    <div v-color="g"> 颜色 </div>
+    <div v-color="b"> 颜色 </div>
+    <div class="box" v-drag></div>
+    <div class="box" v-drag></div>
+    <div class="box" v-drag></div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        directives:{
+            //指令也是用来操作DOM的方式
+            red(el){//在这里不用写v-,使用的时候写v-
+                //el 默认传的参数 当前指令作用的元素
+                //让当前元素字体变成虹色
+                el.style.color="red";
+            },
+            //v-color  传一个颜色值进来
+            color(el,bindings){
+                //bindings 是一个对象,是参数的信息
+                //bindings.value 参数代表的值
+                el.style.color=bindings.value;
+            },
+            drag(el){
+                el.onmousedown=function (e) {
+                    this.x=e.clientX-el.offsetLeft;
+                    this.y=e.clientY-el.offsetTop;
+                    document.onmousemove= (e)=> {
+                        el.style.left=e.clientX-this.x+"px";
+                        el.style.top=e.clientY-this.y+"px";
+                    };
+                    document.onmouseup=function () {
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    e.preventDefault();
+                }
+            }
+        },
+        el: "#app",
+        data: {
+            g:"yellowgreen",
+            b:"blue"
+        },
+        methods: {}
+    })
+</script>

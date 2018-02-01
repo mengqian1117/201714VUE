@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <div :class="[a,b,{c:0}]">哈哈</div>
+    <!--[{c:true}]  加上这个class名-->
+    <!--[{c:false}] 没有这个class名-->
+    <div :class="{box1:flg}">嘿嘿</div>
+    <div :class="{box2:a,box1:b}[b]">嘿嘿</div>
+    <!--{box2:"box1",box1:"box2"}["box2"]-->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //:class  数组,对象
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a:"box1",
+            b:"box2",
+            c:"box3",
+            flg:true,
+        },
+        methods: {}
+    })
+</script>

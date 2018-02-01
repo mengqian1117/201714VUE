@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <!--vue中自定义的一个标签表示组件,可以起包裹作用-->
+    <!--v-if操作DOM元素,直接将标签干掉-->
+    <!--v-show操作样式对于这个template标签不起作用-->
+    <template v-if="0">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </template>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {}
+    })
+</script>
