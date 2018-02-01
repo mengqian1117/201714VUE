@@ -29,6 +29,12 @@
 <script src="node_modules/vue/dist/vue.js"></script>
 <script>
     let vm = new Vue({
+        el: "#app",
+        data: {
+            g:"yellowgreen",
+            b:"blue"
+        },
+        methods: {},
         directives:{
             //指令也是用来操作DOM的方式
             red(el){//在这里不用写v-,使用的时候写v-
@@ -58,11 +64,5 @@
                 }
             }
         },
-        el: "#app",
-        data: {
-            g:"yellowgreen",
-            b:"blue"
-        },
-        methods: {}
     })
 </script>
