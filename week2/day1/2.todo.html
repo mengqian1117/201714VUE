@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .del{
+            text-decoration: line-through;
+            color:#ccc
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h2 class="text-center text-primary">
+                        主人你有{{count}}个件事待完成
+                    </h2>
+                    <input type="text" v-model="title" class="form-control" @keyup.enter="addTodo">
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="todo in filterList" @dblclick="refactor(todo)">
+                            <span :class="{del:todo.isSelected}" v-show="cur!=todo">
+                                <input type="checkbox" v-model="todo.isSelected">
+                                {{todo.title}}
+                            </span>
+                            <input v-show="cur==todo" type="text" v-model="todo.title" @blur="cancel" @keyup.13="cancel" v-focus="cur==todo">
+                            <button class="btn btn-danger pull-right btn-xs" @click="removeTodo(todo)">
+                                &bigotimes;
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <ul class="nav nav-pills">
+                        <!--all必须加上''-->
+                        <li role="presentation" :class="{active:hash=='all'}">
+                            <a href="#/all">全部任务</a>
+                        </li>
+                        <li role="presentation" :class="{active:hash=='finish'}">
+                            <a href="#/finish">已完成</a>
+                        </li>
+                        <li role="presentation" :class="{active:hash=='toFinish'}">
+                            <a href="#/toFinish">待完成</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //记住那几个修饰符
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            todoList:[{title:"约会",isSelected:false},{title:"看电影",isSelected:false}],
+            title:"",
+            cur:"",
+            hash:""
+        },
+        methods: {
+            removeTodo(todo){
+                this.todoList=this.todoList.filter(item=>item!=todo);
+            },
+            addTodo(){
+                if(this.title.replace(/ +/g,"")){
+                    this.todoList.unshift({title:this.title,isSelected:false})
+                }
+                //清空
+                this.title='';
+            },
+            refactor(todo){
+                this.cur=todo;
+            },
+            cancel(){
+                //消失输入框,就是让cur不再等于todo
+                this.cur=""
+            },
+        },
+        computed:{
+            count(){//get
+                //未完成的个数,todoList中isSelected是false的
+                return this.todoList.filter(item=>!item.isSelected).length
+            },
+            filterList(){
+                localStorage.setItem("data",JSON.stringify(this.todoList))
+                //根据hash过滤todoList
+                if(this.hash=="all")return this.todoList;
+                if(this.hash=="finish")return this.todoList.filter(item=>item.isSelected);
+                if(this.hash=="toFinish")return this.todoList.filter(item=>!item.isSelected);
+                //因为只要是todoList发生改变(addTodo,removeTodo,refactor,checkbox)
+                // filterList的get就会触发 (filterList依赖todoList)
+                //所以存储todoList在这里存 存储浏览器在本地 localStorage
+                //注意存储的必须是字符串
+
+            }
+        },
+        filters:{},
+        directives:{
+            focus(el,bindings){
+                if(bindings.value){
+                    // el 当前作用的input
+                    // focus原生方法获取焦点
+                    el.focus();
+                }
+            }
+        },
+        created(){
+            //如果缓存中有data就从缓存中拿出数据赋给this.todoList
+            //获取出来的时候字符串 需要变成JSON对象
+            if(localStorage.getItem("data")){
+                this.todoList=JSON.parse(localStorage.getItem("data"));
+            }
+            //location.hash 获取url的哈希值
+            //第一次进来的时候没有hash值默认让this.hash="all"
+            this.hash=location.hash.split("/")[1]||"all";
+            window.addEventListener("hashchange",()=> {
+                //hashchange 只要是hash值变化就会触发的事件
+                //hash值变了 重新给this.hash赋值,注意this问题,使用箭头函数
+                this.hash=location.hash.split("/")[1];
+            });
+        }
+    })
+</script>
