@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <div id="box" ref="box">{{a}}</div>
+    <div ref="box">{{a}}</div>
+    <!--给元素加一个属性ref 实例中可以使用$refs获取出来,如果两个元素ref的值相同了只能获取一个后面会将前面的覆盖掉-->
+    <ul>
+        <!--ref 是v-for循环出来的 就会放在一个数组中-->
+        <li v-for="item in list" ref="item">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*钩子函数中this是当实例 不要使用箭头函数*/
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a:"祝福",
+            list:[1,2,3]
+        },
+        created(){
+            //console.log(this.a);
+            //console.log(this.$data.a);
+        },
+        mounted(){
+            //经常在这里操作DOM
+            //console.log(document.getElementById("box").innerHTML);
+            //console.log(this.$refs['box1']);
+            //console.log(this.$refs.box2);
+            this.list=[1,2,3,4,5,6];
+            //渲染页面的过程是异步的
+            this.$nextTick(()=>{
+                //让页面渲染完成之后执行的函数,为了保证获取DOM的真实性,将操作DOM的方法一般写在这里
+                //重点记住
+                console.log(this.$refs.item.length);
+            });
+        }
+    })
+
+
+</script>

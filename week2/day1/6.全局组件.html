@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <my-box></my-box>
+    <my-box v-if="a"></my-box>
+    <!--这里的a 是实例vm的a-->
+
+    <!--
+    1.有-的时候 使用驼峰命名
+    2.除了首字符不要写大写
+    为了防止出现问题和开发规范 我们一般在标签使用的时候写成-的形式,定义标签名字的时候使用驼峰命名的形式
+    -->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // Vue.Component("自定义的名字",{
+    //     template:"标签"
+    // });
+
+    //组件是独立的 有自己的数据data,也有自己的生命周期
+    Vue.component("myBox",{
+        template:"<div v-if='1'>我是最棒的{{a}}</div><div v-else>我才是最棒的</div>",
+        //The "data" option should be a function that returns a per-instance value in component definitions.
+        //组件中的data必须是一个函数的形式 返回一个对象
+        data(){
+            return{
+                a:"程序猿"
+            }
+        },
+
+    });
+
+    let vm = new Vue({
+        el: "#app",
+        data: {a:"珠峰"},
+        methods: {}
+    });
+
+
+    /*
+    *从页面层面看
+    *   1.一个页面可以看成一个组件
+    *   2.将一些功能抽离出来,写成组件 ,可以复用
+    *
+    *从用法来看
+    *   1.全局组件  任何位置都可以使用
+    *   2.局部组件  必须知道属于谁
+    *
+    *组件就是一些自定义的标签 让vue赋予其特殊意义 (w3c中定义的标签不可以使用)
+    * */
+</script>

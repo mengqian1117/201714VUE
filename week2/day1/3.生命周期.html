@@ -1,71 +1,43 @@
-## vue基础知识
-```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<!--只要是有template 将app全部替换-->
 <div id="app">
-<div  v-f=""></div>
+   {{a}}
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
 </div>
-let vue= new Vue({
-   el:"#app",
-   data:{},     //属性
-   methods:{},  //方法
-   computed:{},  //计算属性
-   watch:{//监控
-      a(newVal,oldVal){},
-      b{
-         handler(){},
-         deep:true,
-         immediate:true
-      }
-    },     
-   filters:{// {{}},v-bind  管道符
-     toFixed(val,arg){
-         //val 管道符前面的值
-         //arg 参数
-     }
-   },
-   directives:{//自定义指令  v-
-      f(el,bindings){
-         //el  :元素
-         //bindings: {value:属性的值}
-      }
-   }
-})
+<!--如果写在这里必须使用template标签 只有这样vue才认识-->
+<template id="temp1">
+    <div>
+        <div>珠峰</div>
+        <div>培训</div>
+        <div>2018</div>
+        <div>2-6</div>
+    </div>
+</template>
 
-```
-
-## 小胡子语法 {{}}
-## 指令
-- v-model
-  - checkbox  [value,....]
-  - radio  val
-  - select option
-- v-text
-- v-html
-- v-once
-- v-bind :
-  - :class
-    - [c1,c2,{box1:true}]
-    - {box:c}
-  - :style
-    - {color:c1,fontSize:"20px"}
-    - [s1,s2]
-- v-on  @
-- v-for (item,index) in 对象,数组,字符串,数字
-- v-if   操作DOM
-- v-else if
-- v-else
-- v-show display:"none"/"block"
-
-##实例上的方法
-- vm.$set()  数据响应
-- vm.mount("#app"")  挂载 相当于 el: "#app"
-- vm.$watch("监控的属性",{})
-- vm.$data.属性   vm.属性
-- vm.$el  #app
-
-
-## 生命周期函数 (钩子函数)
-```
-//创建一个vue实例经历的几个阶段
+<!--
+vue定义的组件 vue给他赋予特殊意义的标签
+template
+transition
+transition-group
+slot  插槽
+-->
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例经历的几个阶段
     //生命周期函数必须记住,this都是当前实例
     /*
     * beforeCreate   created
@@ -129,13 +101,4 @@ let vue= new Vue({
      vm.$destroy();//销毁实例
 
     // 销毁之后有页面已经渲染完成不会没有东西了,但是数据已经改变不了了
-```
-
-
-### 全局组件
-### 局部组件
-### 组件的嵌套
-### 组件之间的数据传递 
-### 插槽
-### 弹窗的例子  面板
-### 路由
+</script>
