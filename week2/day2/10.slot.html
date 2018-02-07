@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <!--写在这里的所有的内容除了属性之外都是vm的-->
+    <child>
+        <h2 slot="hello" @click="fn" ref="he">Hello</h2>
+        <h2 slot="helloChina">你好</h2>
+        <h2 slot="hi">hi</h2>
+        <h2>嗨</h2>
+        <h2>嗨</h2>
+        <h2>嗨</h2>
+        <h2>嗨</h2>
+    </child>
+    <!--定制模板的时候经常使用插槽-->
+</div>
+
+<template id="temp1">
+    <div>
+        <!--插槽 : 将写在组件中的内容插入到这个slot中-->
+        <slot name="hello">如果有内容插入进来不会显示这里的内容</slot>
+        <slot name="helloChina"></slot>
+        <slot name="hi"></slot>
+        <!--<slot name="default">只要没有加slot属性的标签都会在这里显示</slot>-->
+        <!--name="default" 可以省略-->
+        <!--default 最好只有1个-->
+        <slot></slot>
+        <!--<slot>多写就会报警告</slot>-->
+        <slot name="qq">如果没有匹配的内容插入就会显示这里面的内容 <p>哈哈</p></slot>
+    </div>
+</template>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let child={
+        template:"#temp1",
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            fn(){
+                console.log(this.$refs.he.innerHTML);
+            }
+        },
+        components:{child}
+    })
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<template id="panel">
+    <div :class=['panel',color]>
+        <div class="panel-heading" ref="title">
+            <slot name="title"></slot>
+        </div>
+        <div class="panel-body">
+            <slot name="content"></slot>
+        </div>
+        <div class="panel-footer">
+            <slot name="author">匿名</slot>
+            <button class="btn btn-default" @click="say">点我出歌名</button>
+        </div>
+    </div>
+</template>
+<div id="app">
+    <panel :type="item.type" v-for="(item,index) in song" :key="index" @say="saySong">
+        <p slot="title">{{item.title}}</p>
+        <p slot="content">{{item.content}}</p>
+        <p v-if="item.author" slot="author">{{item.author}}</p>
+    </panel>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let panel={
+        template:"#panel",
+        computed:{
+            color(){
+                return "panel-"+this.type
+            }
+        },
+        props:{
+            type:{
+                type:String,
+                default:"default"
+            }
+        },
+        methods:{
+            say(){
+                //获取出title传给父级的函数
+                this.$emit("say",this.$refs.title.innerText)
+            }
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            song:[{title:"我们不一样",content:"歌词内容",author:"高进",type:"danger"},{title:"黑猫警长",content:"歌词内容",author:"黑猫",type:"warning"},{title:"蓝精灵",content:"歌词内容",type:"primary"}]
+        },
+        methods: {
+            saySong(title){
+                alert(title)
+            }
+        },
+        components:{panel}
+    })
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<template id="child">
+    <div>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+</template>
+<div id="app">
+    {{a}}
+    <child ref="kids"></child>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //页面初始渲染时候先走子组件的mounted,再走父组件的mounted
+
+    //组件中有数据变化了
+    let child={
+        template:"#child",
+        data(){return{list:[1,2,3]}},
+        created(){debugger;},
+        beforeMount(){debugger;},
+        mounted(){
+            this.list=["一","二","三"];
+            debugger;
+            },
+        beforeUpdate(){debugger;},
+        updated(){debugger;},
+    };
+    let vm = new Vue({
+        el: "#app",
+        data:{a:"珠峰"},
+        components:{child},
+        beforeMount(){debugger;},
+        mounted(){
+            this.$nextTick(()=>{
+                //以后根实例的mounted 中一般都会套一个$nextTick,
+                debugger;
+                console.log(this.$refs.kids.$el.innerText);
+            });
+            debugger;},
+        beforeUpdate(){debugger;},
+        updated(){debugger;},
+    });
+
+</script>

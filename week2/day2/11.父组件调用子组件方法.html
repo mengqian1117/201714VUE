@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <loading ref="load"></loading>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let loading={
+        template:"<div v-show='flag'>努力加载中......</div>",
+        data(){
+            return{
+                flag:true,
+            }
+        },
+        methods:{
+            hide(){
+                this.flag=false;
+            }
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        mounted(){
+            //让loading消失
+            setTimeout(()=>{
+                //给组件loading加上的ref 获取出来的是组件的实例
+                //console.log(this.$refs.load.hide());
+                //$el:当前组件实例挂载的元素
+                this.$refs.load.$el.style.color="red";
+            },1000)
+        },
+        components:{loading}
+    })
+</script>

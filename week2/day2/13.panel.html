@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+            <panel :type="'danger'" @say="saySong">
+                <p slot="title" ref="title">我们不一样</p>
+                <div slot="content">
+                    <p>我们不一样</p>
+                    <p>每个人都有不同的境遇</p>
+                    <p>我们在这里 </p>
+                    <p>在这里等你</p>
+                    <p>我们不一样</p>
+                    <p>虽然会经历不同的事情</p>
+                    <p>我们都希望</p>
+                    <p>来生还能相遇</p>
+                </div>
+                <div slot="author">
+                    <p>词曲:高进</p>
+                    <p>演唱:大壮</p>
+                </div>
+            </panel>
+
+            <panel :type="'primary'" @say="saySong">
+                <p slot="title" ref="title">敢问路在何方</p>
+                <div slot="content">
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                    <p>你挑着担，我牵着马 </p>
+                </div>
+                <div slot="author">
+                    <p>词曲:高进</p>
+                    <p>演唱:大壮</p>
+                </div>
+            </panel>
+        </div>
+    </div>
+
+</div>
+<template id="panel">
+    <div :class=['panel',color]>
+        <div class="panel-heading">
+            <slot name="title"></slot>
+        </div>
+        <div class="panel-body">
+            <slot name="content"></slot>
+        </div>
+        <div class="panel-footer">
+            <slot name="author"></slot>
+            <button class="btn btn-danger" @click="say">弹出歌名</button>
+        </div>
+    </div>
+</template>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+    let panel={
+        template:"#panel",
+        props:{
+            type:{
+                type:[String],
+                default:"default",//没传type就给一个默认类型
+            }
+        },
+        data(){
+            return{}
+        },
+        computed:{
+            color(){
+                return "panel-"+this.type;
+            }
+        },
+        methods:{
+            say(){
+                this.$emit("say")
+            }
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        components:{panel},
+        methods:{
+            saySong(){
+                alert(this.$refs.title.innerText)
+            }
+        }
+    })
+</script>
