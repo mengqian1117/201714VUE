@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        .bg{
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ddd;
+        }
+        .bg .mask{
+            position: absolute;
+            width: 350px;
+            height: 250px;
+            background-color: white;
+            left: 50%;
+            margin-left: -175px;
+            top:200px;
+        }
+        .bg span{
+            float: right;
+            cursor: pointer;
+            font-size: 40px;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="flg=true">弹出</button>
+    <log v-show="flg" @close="close"></log>
+</div>
+<!--template 不写在#app中-->
+<!--组件的名字不要使用html中的标签-->
+<template id="dialog">
+    <div class="bg">
+        <div class="mask">
+            <span @click="close">×</span>
+        </div>
+    </div>
+</template>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //定义一个组件
+    let log={
+        template:"#dialog",
+        methods:{
+            close(){
+                //给父组件发射信息 让父亲触发@close绑定的函数 close
+                this.$emit("close");
+            }
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {flg:false},
+        methods: {
+            close(){
+                this.flg=false;
+            }
+        },
+        components:{
+            //注册组件
+            log,
+        }
+    })
+</script>

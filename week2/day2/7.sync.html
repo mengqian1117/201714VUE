@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    父亲发红包 {{money}}
+    <!--<child :m="money" @update:m="(val)=>{money=val}"></child>-->
+    <!--语法糖:将复杂的写法简便化-->
+    <child :m.sync="money"></child>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {money:100},
+        components:{
+            child:{
+                props:["m"],
+                template:"<div>儿子收红包{{m}} <button @click='addM'>多给点</button> </div>",
+                methods:{
+                    addM(){
+                        this.$emit("update:m",10000)
+                    }
+                }
+            }
+        }
+    })
+</script>

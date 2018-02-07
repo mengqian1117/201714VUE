@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="radio" v-model="sel" value="home">home
+    <input type="radio" v-model="sel" value="list">list
+    <br>
+    <!--<home v-show="sel=='home'"></home>-->
+    <!--<list v-show="sel=='list'"></list>-->
+    <!--
+    Component(首字母大小写都行) vue提供的组件 根据is的值来判断显示哪一个组件
+    -->
+    <!--注意这里组件切换会让组件销毁重建.... 这样会浪费性能-->
+    <!--使用一个标签包起来 keep-alive  不会导致组件销毁 给他缓存起来了 -->
+    <keep-alive>
+        <Component :is="sel"></Component>
+    </keep-alive>
+
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let home={
+        created(){
+            console.log("create");
+        },
+        destroyed(){
+            console.log("销毁");
+        },
+        template:"<h2>HOME</h2>",
+    };
+    let list={
+        template:"<h2>LIST</h2>",
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {sel:""},
+        methods: {},
+        components:{home,list}
+    })
+</script>

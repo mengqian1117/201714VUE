@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <!--只要是自定义的标签都会被vue看成组件-->
+    <dov>哈哈</dov>
+    <temp1></temp1>
+    <temp2></temp2>
+    <temp3></temp3>
+    <div></div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 1.定义组件
+    * 2.注册组件
+    * 3.使用组件
+    * */
+    //定义组件
+    //子组件不可以使用父组件的数据
+    let temp1={
+        template:"<h2>我们不一样{{a}}</h2>",
+        data(){
+            return{
+                a:1
+            }
+        }
+    };
+    let temp2={
+        template:"<h2>每个人都有不同的境遇</h2>",
+    };
+    let vm = new Vue({//当前实例也可以看成一个组件
+        el: "#app",
+        data: {
+            a:"珠峰"
+        },
+        components:{
+            //注册组件,组件名字跟上面定义的组件重名可以省略写法
+            temp1,
+            temp2,
+            temp3:{template:"<h3>一样</h3>"}
+        }
+    });
+    //Vue.component("",{})
+    //组件就是一个对象
+</script>

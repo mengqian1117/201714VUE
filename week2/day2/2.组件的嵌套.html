@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //组件嵌套的时候必须保证注册的组件已经定义过了
+    //组件在哪里使用就在那里注册
+    let grandson={template:"<div>孙子</div>"};
+    let son={
+        template:"<div>儿子<grandson></grandson></div>",
+        components:{grandson}
+    };
+    let parent={
+        template:"<div>父亲 <son> </son>  </div>",
+        components:{son},
+    };
+    let vm = new Vue({
+        el: "#app",
+        components:{parent}
+    })
+</script>

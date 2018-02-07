@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    //创建类
+    function Girl() {
+        this.Event={}
+    }
+    //订阅
+    Girl.prototype.on=function (type,cb) {
+        if(!this.Event[type])this.Event[type]=[];
+        this.Event[type].push(cb);
+    };
+    //发布
+    Girl.prototype.emit=function (type,...arg) {
+        this.Event[type].forEach(item=>item(...arg))
+    };
+
+    let girl=new Girl();
+    let eat=function () {
+        console.log("吃好吃的");
+    };
+    let shopping=function () {
+        console.log("购物");
+    };
+    //订阅
+    girl.on("开心",eat);
+    girl.on("开心",shopping);
+    girl.on("不开心",eat);
+    girl.on("不开心",shopping);
+
+    function fn() {
+        console.log("今天我喜欢的男生跟我表白了");
+        //发布
+        girl.emit("开心")
+    }
+    //fn();
+
+    function fn1() {
+        console.log("今天我喜欢的男生跟闺蜜好了");
+        //发布
+        girl.emit("不开心")
+    }
+    fn1();
+
+</script>

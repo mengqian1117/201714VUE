@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    父亲发红包{{money}}
+    <child :m="money" @change-money="addM"></child>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+    let child={
+        props:["m"],
+        template:"<div>儿子收红包{{m}} <button @click='addMoney'>再给点呗</button></div>",
+        methods:{
+            addMoney(){
+                //子组件是改变不了父组件的值,但是可以通过其他方式让父亲自己改变
+                //在子组件中发射一个信息告诉父组件执行一个事件 去修改自己的数据
+                this.$emit("change-money",100000)
+            }
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money:100
+        },
+        components:{child},
+        methods:{
+            addM(val){
+                this.money=val;
+            }
+        }
+    });
+
+
+</script>

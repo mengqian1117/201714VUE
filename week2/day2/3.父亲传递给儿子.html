@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+<div id="app">
+    父亲发红包 {{money}}
+    <child :m="money" :cl="cloths"></child>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //儿子获取父亲的属性
+    //1.给组件加一个 :属性=父亲的属性   使用自己定义的属性接收父亲的属性值
+    //2.在组件定义中使用props属性获取 是一个数组放的是自己定义的属性(注意属性是一个字符串)
+    let child={
+        props:["m","cl"],
+        template:"<div><div>儿子收红包{{m}}</div> <div>穿上{{cl}}</div></div> ",
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money:1000,
+            cloths:"花棉袄"
+        },
+        components:{child}
+    })
+</script>
