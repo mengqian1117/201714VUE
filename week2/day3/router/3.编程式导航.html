@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        .active{color: red}
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--<router-link :to="{path:'/home'}" tag="button">HOME</router-link>-->
+    <!--声明式导航 to  ,默认使用的是push-->
+    <router-link to="/home" tag="button">HOME</router-link>
+    <router-link to="/list" tag="button">LIST</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    //[]
+    let home={
+        template:"<div><h2>首页</h2><button @click='toList'>跳转到list</button></div>",
+        methods:{
+            toList(){
+                // 编程式路由
+                // 素所有配置过路由的组件都有两个属性 this.$router和 this.$route
+                // this.$router 里面都是方法函数 (push、 replace、 go)
+                // this.$route 里面都是属性 (path params query name)
+                //this.$router.push("/list");//类似 history.pushState()
+                this.$router.replace("/list");
+               //["/","/home",'/list',"/home"]
+               //["/","/home",'/list',"/list"]
+            }
+        }
+    };
+    let list={
+        template:"<div><h2>列表页</h2><button @click='back'>返回</button></div>",
+        methods:{
+            back(){
+                //go(n);n>0 前进几次;  n<0 后退几次
+                //back() 返回一次.一般不使用,使用go(-1) 代替back
+                this.$router.go(-1);
+            }
+        }
+    };
+    let routes=[
+        {path:"/home",component:home},
+        {path:"/list",component:list}
+    ];
+    let router=new VueRouter({
+        routes,
+        linkActiveClass:"active"
+    });
+    let vm = new Vue({
+        el: "#app",
+        router,
+    })
+</script>

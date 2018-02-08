@@ -1,5 +1,5 @@
 {
-  "name": "day3",
+  "name": "router",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.6.1",
     "bootstrap": "^3.0.0",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1"

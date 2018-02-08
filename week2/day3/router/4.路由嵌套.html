@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+
+<div id="app">
+    <ul class="nav nav-pills">
+        <li role="presentation">
+            <router-link to="/home">首页</router-link>
+        </li>
+        <li role="presentation">
+            <router-link to="/news">新闻</router-link>
+        </li>
+    </ul>
+    <router-view></router-view>
+</div>
+<template id="news">
+    <div class="container">
+        <ul class="nav nav-pills nav-stacked col-lg-4 col-md-4">
+            <li role="presentation">
+                <router-link to="/news/sport">体育新闻</router-link>
+            </li>
+            <li role="presentation">
+                <router-link to="/news/game">娱乐新闻</router-link>
+            </li>
+            <li role="presentation">
+                <router-link to="/news/money">财经新闻</router-link>
+            </li>
+        </ul>
+        <div class="col-lg-8 col-md-8">
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home={template:"<h1>首页</h1>"};
+    let news={template:"#news"};
+    let sport={template:"<h2>体育新闻sport</h2>"};
+    let game={template:"<h2>娱乐新闻game</h2>"};
+    let money={template:"<h2>财经新闻money</h2>"};
+    let routes=[
+        {path:"/home",component:home},
+        {path:"/news",component:news,
+            children:[//子路由的映射 子路由的路径不要加/
+                {path:"sport",component:sport},
+                {path:"game",component:game},
+                {path:"money",component:money},
+            ]
+        },
+    ];
+    let router=new VueRouter({
+        routes,
+    });
+    let vm = new Vue({
+        el: "#app",
+        router,
+    })
+</script>

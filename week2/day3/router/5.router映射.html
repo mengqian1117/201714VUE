@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+
+        .active{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <router-link to="/home" tag="button">home</router-link>
+    <router-link to="/list" tag="button">list</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home={template:"<h2>HOME</h2>"};
+    let list={template:"<h2>LIST</h2>"};
+    let routes=[
+        {path:"/",component:home},//只有/的时候 默认home
+        {path:"/home",component:home},
+        {path:"/list",component:list},
+        // {path:"*",component:list},//匹配任意路径
+        //* 放在最后面  因为映射表是有序的 放在最上面 无论path是啥永远都显示list
+        {path:"*",redirect:"/list"},//重定向
+    ];
+    let router=new VueRouter({
+        routes,
+        linkActiveClass:"active",
+    });
+    let vm = new Vue({
+        el: "#app",
+        router,
+    });
+</script>

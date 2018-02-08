@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <router-link to="/list/1/999">商品1</router-link>
+    <router-link to="/list/2/888">商品2</router-link>
+    <router-link to="/list/3/777">商品3</router-link>
+    <router-link to="/list/4/666">商品4</router-link>
+
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let listDetail={
+        template:"<h2>这里是第{{$route.params.num}}个商品的详情页,价格为¥{{$route.params.price}}</h2>"
+    };
+    //"/list/:num "  是: /list是必须的 /:num 可以是任意值(必须得有)
+    // 实际上值被  num接收,变成一个对象 {num:你传的参数}
+    //如何获取出这个参数 ? 在$route里面 params(也是一个对象)
+    // params {num:,price}
+    let routes=[{path:"/list/:num/:price",component:listDetail}];
+    let router=new VueRouter({routes,});
+    let vm = new Vue({
+        el: "#app",
+        router,
+    });
+
+
+    /*
+    * http://i.waimai.meituan.com/restaurant/364510574303566
+    * http://i.waimai.meituan.com/restaurant/422604301952716
+    * http://i.waimai.meituan.com/restaurant/430975193211191
+    * */
+</script>
+

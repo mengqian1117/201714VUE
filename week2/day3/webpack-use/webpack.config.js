@@ -1,0 +1,21 @@
+let path=require("path");
+//单入口
+module.exports={
+    entry:"./src/main.js",
+    output:{
+        filename:"build.js",
+        path:path.resolve("./dist"),
+        //path:__dirname+"/dist"
+    }
+};
+//多入口打包
+module.exports={
+    entry:{
+        build1:"./src/main.js",
+        build2:"./src/main1.js",
+    },
+    output:{
+        filename:"[name].js",
+        path:path.resolve("./dist"),
+    }
+};

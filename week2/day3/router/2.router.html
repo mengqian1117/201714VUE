@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <style>
+        button.router-link-active{
+            color: red;
+        }
+        .active{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--组件显示的位置 ,vue提供的定义好的组件 router-view-->
+    <!--<a href="# /home">home</a>-->
+    <!--<a href="#/list">list</a>-->
+    <!--默认将router-link编译成 a标签 hash模式 href="#/XXX" history模式 href没有# -->
+    <!--可以修改router-link的编译后标签 -->
+    <router-link to="/home" tag="button">home</router-link>
+    <router-link to="/list" tag="button">list</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<!--先引入vue再引入vue-router-->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    // 只要是引入了vue-router就会默认有一个VueRouter的构造函数
+    //使用new 创建一个VueRouter 的实例
+    //发现 :只要是注入了router 打开页面就会默认url后面加一个#/
+    //路由:根据路径path 的不同显示不同的组件 component
+
+    /*
+    * 1.定义组件
+    * 2.路由的对应关系(path<==>component) 映射表
+    * 3.路由配置 router=new VueRouter({  });
+    * 4.路由注入  在实例中注入
+    * */
+    // 1.定义组件
+    let home={template:"<h2>HOME</h2>"};
+    let list={template:"<h2>LIST</h2>"};
+    //2.映射表
+    let routes=[//路由的映射关系
+        {path:"/home",component:home},
+        {path:"/list",component:list},
+    ];
+    //3.路由配置
+    let router=new VueRouter({
+        //mode:"history",// 模式 默认是hash模式
+        routes,
+        linkActiveClass:"active",//选中的class名
+    });
+    let vm = new Vue({
+        el: "#app",
+        //简写 router:router
+        //4.路由注入
+        router,
+    });
+</script>

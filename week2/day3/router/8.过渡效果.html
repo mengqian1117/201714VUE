@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
+</head>
+<body>
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表</router-link>
+    <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+        <!--mode="out-in"  模式 :out-in 先出再进  in-out :先进再出-->
+        <keep-alive>
+            <!--缓存起来了,不会销毁 -->
+            <router-view style="position: absolute"></router-view>
+        </keep-alive>
+    </transition>
+
+
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home={template:"<h2>首页</h2>",created(){debugger}};
+    let list={template:"<h2>列表</h2>",created(){debugger}};
+    let routes=[{path:"/home",component:home},{path:"/list",component:list}];
+    let router=new VueRouter({
+        routes,
+    });
+    let vm = new Vue({
+        el: "#app",
+        router,
+    })
+</script>

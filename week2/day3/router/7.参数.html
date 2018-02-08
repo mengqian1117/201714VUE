@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训2017-14JS</title>
+</head>
+<body>
+
+<div id="app">
+    <!--通过name属性和params来匹配-->
+    <router-link :to="{name:'list',params:{num:1,price:999}}">
+        商品1
+    </router-link>
+    <!--<router-link to="/list/1/999">商品1</router-link>-->
+    <router-link :to="{name:'list',params:{num:2,price:888}}">
+        商品2
+    </router-link>
+    <router-link :to="{name:'list',params:{num:3,price:777}}">
+        商品3
+    </router-link>
+    <router-link :to="{name:'list',params:{num:1,price:666}}">
+        商品4
+    </router-link>
+
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let listDetail={
+        template:"<h2>这里是第{{$route.params.num}}个商品的详情页,价格为¥{{$route.params.price}}</h2>",
+        //需求:只要路径发生改变就去重新请求数据
+        /*
+        updated(){
+            alert("2");//只要数据有变化就会执行,我们只是想路径改变的时候发请求
+        },
+        */
+        //使用watch来监控 $route  [很常用]
+        watch:{
+            $route(newVal,oldVal){
+                console.log(newVal.path);
+                console.log(newVal.params);
+                console.log(newVal.name);
+                //alert("请求数据")
+            }
+        },
+    };
+    let routes=[{path:"/list/:num/:price",component:listDetail,name:'list'}];
+    let router=new VueRouter({routes,});
+    let vm = new Vue({
+        el: "#app",
+        created(){
+            // 默认请求数据(第一次加载发送的请求)
+            // alert("去请求数据");
+        },
+        router,
+    });
+
+</script>
+
