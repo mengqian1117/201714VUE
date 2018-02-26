@@ -1,6 +1,6 @@
 <template>
 <div class="nav">
-  <i class="iconfont icon-fanhui" v-if="f"></i>
+  <i class="iconfont icon-fanhui" v-if="f" @click="back"></i>
   <h2>
     <slot></slot>
   </h2>
@@ -18,6 +18,12 @@
         //type:Boolean,
         default:false,
         //默认是不显示 如果使用组件的时候传一个 :f="true" 此时就会显示
+      }
+    },
+    methods:{
+      back(){
+        //$route $router
+        this.$router.go(-1);
       }
     }
   }

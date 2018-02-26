@@ -16,4 +16,11 @@
   *{padding: 0;margin: 0}
   a{text-decoration: none}
   ul,li{list-style: none}
+  .content{
+    position:absolute ;
+    top:50px;
+    bottom: 50px;
+    width: 100%;
+    overflow-y: auto;
+  }
 </style>
