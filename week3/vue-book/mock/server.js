@@ -37,6 +37,39 @@ http.createServer((req,res)=>{
       res.end(JSON.stringify(data))
     });
     return;
+  };
+  if(pathname=="/book"){
+    let method =req.method;
+    let id=query.id;
+    //根据请求方式来做不同的数据返回处理
+    switch (method){
+      case "GET":
+        if(id){//获取一个图书的信息
+          //读取全部数据,根据id找出对应的数据返回给客户端
+          getData((data)=>{
+            let book=data.find((item)=>item.bookId==id);
+            res.end(JSON.stringify(book));
+          })
+        }else {//获取全部图书的信息
+          //读取出全部数据返回给前端
+          getData((data)=>{res.end(JSON.stringify(data))})
+        }
+        break;
+      case "POST":
+        break;
+      case "PUT":
+        break;
+      case "DELETE":
+        //根据query中的id值,将读取的数据中删除这一条数据,再将修改后的数据写入到book.json 中
+        getData((data)=>{
+          data=data.filter(item=>item.bookId!=id);
+          fs.writeFile("./book.json",JSON.stringify(data),"utf8",(e)=>{
+            if(e) return res.end("error");
+            res.end("success")
+          })
+        });
+        break;
+    }
   }
 }).listen(6789,()=>{
   console.log("success");

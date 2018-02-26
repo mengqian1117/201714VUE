@@ -1,0 +1,9 @@
+-  "/slides" 获取 swiper中的图片
+-  "/hot" 获取热门图书
+-  "/book"
+   - method GET   
+     - query 中没有id    获取所有的图书
+     - query 没有id      获取一个图书的信息
+   - method  DELETE 删除某一个图书的信息
+   - method  POST 增加一个新的图书信息
+   - method  PUT 修改某一个图书的信息

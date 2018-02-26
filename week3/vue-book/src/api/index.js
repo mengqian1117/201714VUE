@@ -12,3 +12,9 @@ export let getSlides=()=>{
 export let getHot=()=>{
   return axios.get("/hot");
 };
+export let getBooks=()=>{
+  return axios.get("/book")
+};
+export let deleteBook=(id)=>{
+  return axios.delete("/book?id="+id)
+}
