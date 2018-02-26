@@ -3,7 +3,12 @@ import axios from "axios";
 //设置请求url的基础路径
 //例如 /slides 实际请求的是 http://localhost:6789/slides
 axios.defaults.baseURL="http://localhost:6789";
+//将返回的数据直接替换成res.data
+axios.interceptors.response.use(res=>res.data);
 //导出所有的方法
 export let getSlides=()=>{
-  return axios.get("/slides")
+  return axios.get("/slides");
+};
+export let getHot=()=>{
+  return axios.get("/hot");
 };

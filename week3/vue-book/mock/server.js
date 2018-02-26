@@ -2,6 +2,14 @@ let http=require("http");
 let url=require("url");
 let fs=require("fs");
 
+//读取数据
+function getData(cb) {//传进一个函数
+  fs.readFile("./book.json","utf8",(e,val)=>{
+    if(e)return cb([]);
+    cb(JSON.parse(val))
+  })
+}
+
 //获取 slides
 let slides=require("./slides");
 http.createServer((req,res)=>{
@@ -20,6 +28,15 @@ http.createServer((req,res)=>{
     //setHeader(属性名,属性值) 设置响应头
     res.setHeader("Content-type","application/json;charset=utf8");
     res.end(JSON.stringify(slides));
+    return;
+  };
+  if(pathname=="/hot"){
+    getData((data)=>{
+      //这个函数肯定是读取完成之后执行的
+      data.reverse();
+      res.end(JSON.stringify(data))
+    });
+    return;
   }
 }).listen(6789,()=>{
   console.log("success");
