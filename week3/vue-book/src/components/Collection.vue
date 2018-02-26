@@ -5,9 +5,10 @@
 </template>
 
 <script>
-    export default {
-        name: "collection"
-    }
+
+  export default {
+    name: "collection"
+  }
 </script>
 
 <style scoped>

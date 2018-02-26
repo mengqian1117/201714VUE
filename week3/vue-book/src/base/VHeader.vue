@@ -8,19 +8,19 @@
 </template>
 
 <script>
-    export default {
-      name: "v-header",
-      data(){
-          return {}
-      },
-      props:{
-        f:{
-          //type:Boolean,
-          default:false,
-          //默认是不显示 如果使用组件的时候传一个 :f="true" 此时就会显示
-        }
+  export default {
+    name: "v-header",
+    data(){
+      return {}
+    },
+    props:{
+      f:{
+        //type:Boolean,
+        default:false,
+        //默认是不显示 如果使用组件的时候传一个 :f="true" 此时就会显示
       }
     }
+  }
 </script>
 
 <style scoped lang="less">

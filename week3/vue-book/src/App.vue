@@ -7,7 +7,6 @@
 <script>
   //将Tab组件导入
   import Tab from "./base/Tab.vue"
-
   export default {
     components:{Tab,}
   }

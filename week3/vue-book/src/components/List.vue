@@ -6,10 +6,10 @@
 
 <script>
   import VHeader from "../base/VHeader.vue"
-    export default {
-        name: "list",
-      components:{VHeader}
-    }
+  export default {
+    name: "list",
+    components:{VHeader,}
+  }
 </script>
 
 <style scoped>
