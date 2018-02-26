@@ -15,10 +15,9 @@ let slides=require("./slides");
 http.createServer((req,res)=>{
   //跨域问题
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
   res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   res.setHeader("X-Powered-By",' 3.2.1');
-  res.setHeader("Content-Type", "application/json;charset=utf-8");
   if(req.method=="OPTIONS") return res.end();/*让options请求快速返回*/
 
   //根据url模块解析req的url,通过解构赋值获取pathname和query(解析的时候传一个参数true这样query就是一个对象)
@@ -58,6 +57,25 @@ http.createServer((req,res)=>{
       case "POST":
         break;
       case "PUT":
+        //修改数据  需要参数id,需要修改后的数据
+        if(id){
+          let data="";
+          req.on("data",(chunk)=>{data+=chunk});
+          req.on("end",()=>{
+            //先读取数据,根据id找到对应的数据,将其修改
+            getData((val)=>{
+              val=val.map((item)=>{
+                if(item.bookId==id)return JSON.parse(data);
+                return item;
+              });
+              //写入新数据
+              fs.writeFile("./book.json",JSON.stringify(val),"utf8",(e)=>{
+                if(e)res.end("error");
+                res.end("success");
+              });
+            });
+          });
+        }
         break;
       case "DELETE":
         //根据query中的id值,将读取的数据中删除这一条数据,再将修改后的数据写入到book.json 中

@@ -23,4 +23,8 @@
     width: 100%;
     overflow-y: auto;
   }
+  input{
+    border: 1px solid #c8cbcf;
+    padding: 0 10px;
+  }
 </style>

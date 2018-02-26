@@ -2,15 +2,15 @@
 <div>
   <VHeader>图书列表</VHeader>
   <ul class="content">
-    <li v-for="book in books">
+    <router-link tag="li" v-for="(book,i) in books" :to="{name:'detail',params:{id:book.bookId}}" :key="i">
       <img :src="book['bookCover']" alt="">
       <div>
         <h4>{{book["bookName"]}}</h4>
         <p>{{book["bookInfo"]}}</p>
         <b>{{book["bookPrice"]}}</b>
-        <button @click="remove(book.bookId)">删除</button>
+        <button @click.stop="remove(book.bookId)">删除</button>
       </div>
-    </li>
+    </router-link>
   </ul>
 </div>
 </template>
