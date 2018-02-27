@@ -13,14 +13,17 @@ export let getHot=()=>{
   return axios.get("/hot");
 };
 export let getBooks=()=>{
-  return axios.get("/book")
+  return axios.get("/book");
 };
 export let deleteBook=(id)=>{
-  return axios.delete("/book?id="+id)
+  return axios.delete("/book?id="+id);
 };
 export let getBook=(id)=>{
-  return axios.get("/book?id="+id)
+  return axios.get("/book?id="+id);
 };
 export let changeBook=(id,data)=>{
-  return axios.put("/book?id="+id,data)
+  return axios.put("/book?id="+id,data);
+};
+export let addBook=(data)=>{
+  return axios.post("/book",data);
 };
