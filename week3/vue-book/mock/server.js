@@ -33,6 +33,7 @@ http.createServer((req,res)=>{
     getData((data)=>{
       //这个函数肯定是读取完成之后执行的
       data.reverse();
+      res.setHeader("Content-type","application/json;charset=utf8");
       res.end(JSON.stringify(data))
     });
     return;
@@ -47,14 +48,35 @@ http.createServer((req,res)=>{
           //读取全部数据,根据id找出对应的数据返回给客户端
           getData((data)=>{
             let book=data.find((item)=>item.bookId==id);
+            res.setHeader("Content-type","application/json;charset=utf8");
             res.end(JSON.stringify(book));
           })
         }else {//获取全部图书的信息
           //读取出全部数据返回给前端
-          getData((data)=>{res.end(JSON.stringify(data))})
+          getData((data)=>{
+            res.setHeader("Content-type","application/json;charset=utf8");
+            res.end(JSON.stringify(data));
+          })
         }
         break;
       case "POST":
+        //增加新图书
+        let data='';
+        req.on("data",(chunk)=>{data+=chunk});
+        req.on("end",()=>{
+          getData((books)=>{
+            data=JSON.parse(data);
+            //先给数据增加bookId,注意如果数据原来是空的,给他一个bookId为1
+            data.bookId=books.length?books[books.length-1].bookId+1:1;
+            //将data push到books中
+            books.push(data);
+            fs.writeFile("./book.json",JSON.stringify(books),"utf8",(e)=>{
+              res.setHeader("Content-type","application/json;charset=utf8");
+              if(e)res.end("error");
+              res.end("success")
+            })
+          })
+        });
         break;
       case "PUT":
         //修改数据  需要参数id,需要修改后的数据
@@ -70,6 +92,7 @@ http.createServer((req,res)=>{
               });
               //写入新数据
               fs.writeFile("./book.json",JSON.stringify(val),"utf8",(e)=>{
+                res.setHeader("Content-type","application/json;charset=utf8");
                 if(e)res.end("error");
                 res.end("success");
               });
@@ -82,6 +105,7 @@ http.createServer((req,res)=>{
         getData((data)=>{
           data=data.filter(item=>item.bookId!=id);
           fs.writeFile("./book.json",JSON.stringify(data),"utf8",(e)=>{
+            res.setHeader("Content-type","application/json;charset=utf8");
             if(e) return res.end("error");
             res.end("success")
           })
