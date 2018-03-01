@@ -1,0 +1,6 @@
+登录请求 api
+url:"/user"
+method:"post"
+参数数据: {user:"",pw:""}
+返回值:{code:0,message:"",user:{}}    失败   账号没有 密码不对
+返回值:{code:1,message:"",user:{}}    成功
