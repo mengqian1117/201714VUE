@@ -20,4 +20,8 @@
     background-color: #004085;
     overflow: hidden;
   }
+  #app{
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -7,7 +7,7 @@
     <el-form-item>
       <el-input type="password" placeholder="密码" v-model="user.pw"></el-input>
     </el-form-item>
-    <el-checkbox checked class="remember">记住密码</el-checkbox>
+    <el-checkbox class="remember" v-model="isRemember">记住密码</el-checkbox>
     <el-form-item style="width: 100%">
       <el-button type="primary" style="width: 100%" @click="getLogin">登录</el-button>
     </el-form-item>
@@ -19,18 +19,26 @@
   export default {
     name: "login",
     data(){
-      return {user:{user:"mengqian",pw:"123456"}}
+      return {user:{user:"",pw:""},isRemember:true}
     },
     methods:{
       async getLogin(){
         let {code,message,user}=await login(this.user);
         if(code){
-          alert(message)
-        }else {
-          alert(message);
-        }
+          //判断isRemember的值 是否记录缓存
+          if(this.isRemember){
+            localStorage.setItem("user",JSON.stringify(this.user));
+          }
+          //跳转home
+          this.$router.push("/home")
+        }else {alert(message);}
       }
-    }
+    },
+    created(){
+      if(localStorage.getItem("user")){
+        this.user=JSON.parse(localStorage.getItem("user"));
+      }
+    },
   }
 </script>
 
