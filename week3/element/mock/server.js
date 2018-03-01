@@ -27,11 +27,7 @@ http.createServer((req,res)=>{
         let result={message:"", code:0, user:{},};
         let user=val.find(item=> item.user==data.user);
         if(user){
-          if(user.pw==data.pw){
-            result={message:"success",code:1,user:user}
-          }else {
-            result={message:"密码不正确",code:0,user:{}}
-          }
+          result=user.pw==data.pw?{message:"success",code:1,user:user}:{message:"密码不正确",code:0,user:{}};
         }else {
           result={message:"账户不存在",code:0,user:{}}
         }
